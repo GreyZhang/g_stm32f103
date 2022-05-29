@@ -1,0 +1,9 @@
+* learning trip for STM32F103
+** 目标
+- 开发工具熟悉
+- FreeRTOS熟悉
+- 串口
+- CAN
+- USB
+** 学习笔记
+- [[https://blog.csdn.net/grey_csdn/article/details/125039579][1254_CubeIDE程序烧写一次之后ST link无法再次烧程序解决]]
