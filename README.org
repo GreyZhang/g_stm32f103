@@ -7,3 +7,4 @@
 - USB
 ** 学习笔记
 - [[https://blog.csdn.net/grey_csdn/article/details/125039579][1254_CubeIDE程序烧写一次之后ST link无法再次烧程序解决]]
+- [[https://blog.csdn.net/grey_csdn/article/details/125053044][1255_使用CubeIDE以及STLink做STM32F103的开发调试]]
