@@ -8,3 +8,4 @@
 ** 学习笔记
 - [[https://blog.csdn.net/grey_csdn/article/details/125039579][1254_CubeIDE程序烧写一次之后ST link无法再次烧程序解决]]
 - [[https://blog.csdn.net/grey_csdn/article/details/125053044][1255_使用CubeIDE以及STLink做STM32F103的开发调试]]
+- [[https://blog.csdn.net/grey_csdn/article/details/125089452][1256_使用CubeIDE配置STM32F103的GPIO并驱动LDE测试]]
