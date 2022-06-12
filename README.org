@@ -8,7 +8,7 @@
 ** 学习笔记
 - [[https://blog.csdn.net/grey_csdn/article/details/125039579][1254_CubeIDE程序烧写一次之后ST link无法再次烧程序解决]]
 - [[https://blog.csdn.net/grey_csdn/article/details/125053044][1255_使用CubeIDE以及STLink做STM32F103的开发调试]]
-- [[https://blog.csdn.net/grey_csdn/article/details/125089452][1256_使用CubeIDE配置STM32F103的GPIO并驱动LDE测试]]
+- [[https://blog.csdn.net/grey_csdn/article/details/125089452][1256_使用CubeIDE配置STM32F103的GPIO并驱动LED测试]]
 - [[https://blog.csdn.net/grey_csdn/article/details/125089499][1257_借助于Arduino调试STM32F103的UART串口功能]]
 - [[https://blog.csdn.net/grey_csdn/article/details/125106698][1258_使用CubeIDE增加FreeRTOS的功能]]
 - [[https://blog.csdn.net/grey_csdn/article/details/125114634][1259_STM32CubeProgrammer的简单使用]]
