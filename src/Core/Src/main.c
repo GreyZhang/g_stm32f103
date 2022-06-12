@@ -44,9 +44,13 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
-
+CAN_HandleTypeDef hcan;
 osThreadId t1000Handle;
 osThreadId t500Handle;
+
+CAN_RxHeaderTypeDef rxHeader;                // CAN Bus Transmit Header
+uint8_t canRX[8] = {0, 0, 0, 0, 0, 0, 0, 0}; // CAN Bus Receive Buffer
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -55,6 +59,7 @@ osThreadId t500Handle;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_CAN_Init(void);
 void freertos_lld_1000ms_task(void const *argument);
 void freertos_lld_task_500ms(void const *argument);
 
@@ -79,6 +84,7 @@ void vPortSetupTimerInterrupt(void)
 int main(void)
 {
     /* USER CODE BEGIN 1 */
+    CAN_FilterTypeDef can_filter;
     /* USER CODE END 1 */
 
     /* MCU Configuration--------------------------------------------------------*/
@@ -100,8 +106,22 @@ int main(void)
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
     MX_USART1_UART_Init();
+    MX_CAN_Init();
     /* USER CODE BEGIN 2 */
+    /* canfil.FilterBank = 0; */
+    /* canfil.FilterMode = CAN_FILTERMODE_IDMASK; */
+    /* canfil.FilterFIFOAssignment = CAN_RX_FIFO0; */
+    /* canfil.FilterIdHigh = 0; */
+    /* canfil.FilterIdLow = 0; */
+    /* canfil.FilterMaskIdHigh = 0; */
+    /* canfil.FilterMaskIdLow = 0; */
+    /* canfil.FilterScale = CAN_FILTERSCALE_32BIT; */
+    /* canfil.FilterActivation = ENABLE; */
+    /* canfil.SlaveStartFilterBank = 14; */
 
+    HAL_CAN_ConfigFilter(&hcan, &can_filter);
+    HAL_CAN_Start(&hcan);
+    HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
     /* USER CODE END 2 */
 
     /* USER CODE BEGIN RTOS_MUTEX */
@@ -204,7 +224,7 @@ static void MX_USART1_UART_Init(void)
 
     /* USER CODE END USART1_Init 1 */
     huart1.Instance = USART1;
-    huart1.Init.BaudRate = 115200;
+    huart1.Init.BaudRate = 2000000;
     huart1.Init.WordLength = UART_WORDLENGTH_8B;
     huart1.Init.StopBits = UART_STOPBITS_1;
     huart1.Init.Parity = UART_PARITY_NONE;
@@ -245,7 +265,43 @@ static void MX_GPIO_Init(void)
     HAL_GPIO_Init(mcu_pin_pc13_led_GPIO_Port, &GPIO_InitStruct);
 }
 
+/**
+ * @brief CAN Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_CAN_Init(void)
+{
+
+    /* USER CODE BEGIN CAN_Init 0 */
+
+    /* USER CODE END CAN_Init 0 */
+
+    /* USER CODE BEGIN CAN_Init 1 */
+
+    /* USER CODE END CAN_Init 1 */
+    hcan.Instance = CAN1;
+    hcan.Init.Prescaler = 9;
+    hcan.Init.Mode = CAN_MODE_NORMAL;
+    hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+    hcan.Init.TimeSeg1 = CAN_BS1_3TQ;
+    hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
+    hcan.Init.TimeTriggeredMode = DISABLE;
+    hcan.Init.AutoBusOff = DISABLE;
+    hcan.Init.AutoWakeUp = DISABLE;
+    hcan.Init.AutoRetransmission = DISABLE;
+    hcan.Init.ReceiveFifoLocked = DISABLE;
+    hcan.Init.TransmitFifoPriority = DISABLE;
+    if (HAL_CAN_Init(&hcan) != HAL_OK)
+    {
+        Error_Handler();
+    }
+    /* USER CODE BEGIN CAN_Init 2 */
+
+    /* USER CODE END CAN_Init 2 */
+}
 /* USER CODE BEGIN 4 */
+
 
 /* USER CODE END 4 */
 

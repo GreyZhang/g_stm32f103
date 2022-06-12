@@ -6,5 +6,6 @@
 
 
 extern  UART_HandleTypeDef huart1;
+extern CAN_HandleTypeDef hcan;
 
 #endif
