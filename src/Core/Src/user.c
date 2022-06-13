@@ -21,7 +21,6 @@ UBaseType_t uxHighWaterMark_500ms;
 UBaseType_t uxHighWaterMark_1000ms;
 CAN_TxHeaderTypeDef user_can_tx_header;
 CAN_RxHeaderTypeDef user_can_rx_header;
-uint8_t user_can_test_counter;
 uint8_t user_can_tx_data[8];
 uint8_t user_can_rx_data[8];
 uint32_t tx_buffer;
@@ -87,19 +86,8 @@ void user_can_test_func(void)
 {
     uint8_t csend[] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
 
-    user_can_test_counter++;
-
-    user_can_tx_header.DLC = user_can_test_counter % 9U;
-    if(user_can_test_counter % 2U == 0U)
-    {
-        user_can_tx_header.IDE = CAN_ID_STD;
-        user_can_tx_header.StdId = user_can_test_counter % (0x7FFU + 1U);
-    }
-    else
-    {
-        user_can_tx_header.IDE = CAN_ID_EXT;
-        user_can_tx_header.ExtId = user_can_test_counter % (0x1FFFFFFFU + 1U);
-    }
+    user_can_tx_header.IDE = CAN_ID_STD;
+    user_can_tx_header.StdId = 0x77U;
     user_can_tx_header.RTR = CAN_RTR_DATA;
     user_can_tx_header.TransmitGlobalTime = DISABLE;
     HAL_CAN_AddTxMessage(&hcan, &user_can_tx_header, csend, &tx_buffer);

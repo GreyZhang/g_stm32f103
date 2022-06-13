@@ -48,8 +48,6 @@ CAN_HandleTypeDef hcan;
 osThreadId t1000Handle;
 osThreadId t500Handle;
 
-CAN_RxHeaderTypeDef rxHeader;                // CAN Bus Transmit Header
-uint8_t canRX[8] = {0, 0, 0, 0, 0, 0, 0, 0}; // CAN Bus Receive Buffer
 
 /* USER CODE BEGIN PV */
 
@@ -108,16 +106,16 @@ int main(void)
     MX_USART1_UART_Init();
     MX_CAN_Init();
     /* USER CODE BEGIN 2 */
-    /* canfil.FilterBank = 0; */
-    /* canfil.FilterMode = CAN_FILTERMODE_IDMASK; */
-    /* canfil.FilterFIFOAssignment = CAN_RX_FIFO0; */
-    /* canfil.FilterIdHigh = 0; */
-    /* canfil.FilterIdLow = 0; */
-    /* canfil.FilterMaskIdHigh = 0; */
-    /* canfil.FilterMaskIdLow = 0; */
-    /* canfil.FilterScale = CAN_FILTERSCALE_32BIT; */
-    /* canfil.FilterActivation = ENABLE; */
-    /* canfil.SlaveStartFilterBank = 14; */
+    can_filter.FilterBank = 0;
+    can_filter.FilterMode = CAN_FILTERMODE_IDMASK;
+    can_filter.FilterFIFOAssignment = CAN_RX_FIFO0;
+    can_filter.FilterIdHigh = 0;
+    can_filter.FilterIdLow = 0;
+    can_filter.FilterMaskIdHigh = 0;
+    can_filter.FilterMaskIdLow = 0;
+    can_filter.FilterScale = CAN_FILTERSCALE_32BIT;
+    can_filter.FilterActivation = ENABLE;
+    can_filter.SlaveStartFilterBank = 14;
 
     HAL_CAN_ConfigFilter(&hcan, &can_filter);
     HAL_CAN_Start(&hcan);
