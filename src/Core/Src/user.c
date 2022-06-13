@@ -99,3 +99,20 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan1)
 {
     HAL_CAN_GetRxMessage(hcan1, CAN_RX_FIFO0, &user_can_rx_header, user_can_rx_data);
 }
+
+void user_can_set_rx_filer(void)
+{
+    CAN_FilterTypeDef can_filter;
+
+    can_filter.FilterBank = 0;
+    can_filter.FilterMode = CAN_FILTERMODE_IDMASK;
+    can_filter.FilterFIFOAssignment = CAN_RX_FIFO0;
+    can_filter.FilterIdHigh = 0;
+    can_filter.FilterIdLow = 0;
+    can_filter.FilterMaskIdHigh = 0;
+    can_filter.FilterMaskIdLow = 0;
+    can_filter.FilterScale = CAN_FILTERSCALE_32BIT;
+    can_filter.FilterActivation = ENABLE;
+    can_filter.SlaveStartFilterBank = 14;
+    HAL_CAN_ConfigFilter(&hcan, &can_filter);
+}

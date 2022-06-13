@@ -28,6 +28,7 @@
 #include "task.h"
 #include "string.h"
 #include "cmsis_gcc.h"
+#include "user.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -82,7 +83,6 @@ void vPortSetupTimerInterrupt(void)
 int main(void)
 {
     /* USER CODE BEGIN 1 */
-    CAN_FilterTypeDef can_filter;
     /* USER CODE END 1 */
 
     /* MCU Configuration--------------------------------------------------------*/
@@ -106,18 +106,7 @@ int main(void)
     MX_USART1_UART_Init();
     MX_CAN_Init();
     /* USER CODE BEGIN 2 */
-    can_filter.FilterBank = 0;
-    can_filter.FilterMode = CAN_FILTERMODE_IDMASK;
-    can_filter.FilterFIFOAssignment = CAN_RX_FIFO0;
-    can_filter.FilterIdHigh = 0;
-    can_filter.FilterIdLow = 0;
-    can_filter.FilterMaskIdHigh = 0;
-    can_filter.FilterMaskIdLow = 0;
-    can_filter.FilterScale = CAN_FILTERSCALE_32BIT;
-    can_filter.FilterActivation = ENABLE;
-    can_filter.SlaveStartFilterBank = 14;
-
-    HAL_CAN_ConfigFilter(&hcan, &can_filter);
+    user_can_set_rx_filer();
     HAL_CAN_Start(&hcan);
     HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
     /* USER CODE END 2 */
