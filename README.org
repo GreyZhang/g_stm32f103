@@ -16,5 +16,6 @@
 - [[https://blog.csdn.net/grey_csdn/article/details/125121582][1260_STM32F103_CubeIDE版本的FreeRTOS_Tick实现分析]]
 - [[https://blog.csdn.net/grey_csdn/article/details/125952173][1309_STM32F103上增加GPIO的翻转并用FreeRTOS调度测试]]
 - [[https://mp.csdn.net/mp_blog/creation/success/126104383][1318_将ST link刷成jlink]]
+- [[https://mp.csdn.net/mp_blog/creation/success/126165904][1319_STM32F103串口BootLoader移植]]
 *** FreeRTOS熟悉
 学习笔记汇总： [[https://github.com/GreyZhang/g_FreeRTOS][FreeRTOS学习笔记]]
